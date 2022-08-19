@@ -20,7 +20,7 @@ class IncomingResponse extends AbstractSignatureResponse
     {
         return [
             'partnerCode', 'accessKey', 'requestId', 'amount', 'orderId', 'orderInfo', 'orderType',
-            'transId', 'message', 'localMessage', 'responseTime', 'errorCode', 'payType', 'extraData',
+            'transId', 'message', 'responseTime', 'errorCode', 'payType', 'extraData', 'resultCode',
         ];
     }
 }

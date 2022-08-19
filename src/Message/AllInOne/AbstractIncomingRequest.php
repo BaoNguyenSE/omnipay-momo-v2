@@ -33,7 +33,7 @@ abstract class AbstractIncomingRequest extends BaseAbstractIncomingRequest
         $data = [];
         $params = [
             'partnerCode', 'accessKey', 'requestId', 'amount', 'orderId', 'orderInfo', 'orderType', 'transId',
-            'message', 'localMessage', 'responseTime', 'errorCode', 'extraData', 'signature', 'payType',
+            'message', 'responseTime', 'errorCode', 'extraData', 'signature', 'payType', 'resultCode',
         ];
         $bag = $this->getIncomingParametersBag();
 

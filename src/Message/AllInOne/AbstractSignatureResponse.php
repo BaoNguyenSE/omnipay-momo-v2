@@ -22,7 +22,7 @@ abstract class AbstractSignatureResponse extends BaseAbstractSignatureResponse
      */
     public function getCode(): ?string
     {
-        return $this->data['errorCode'] ?? null;
+        return $this->data['resultCode'] ?? null;
     }
 
     /**

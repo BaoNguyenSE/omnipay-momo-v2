@@ -39,13 +39,23 @@ class PurchaseResponse extends AbstractSignatureResponse implements RedirectResp
         return $this->data['payUrl'];
     }
 
+    public function getQrCodeUrl(): string
+    {
+        return $this->data['qrCodeUrl'];
+    }
+
+    public function getDeeplinkUrl(): string
+    {
+        return $this->data['deeplink'];
+    }
+
     /**
      * {@inheritdoc}
      */
     protected function getSignatureParameters(): array
     {
         return [
-            'requestId', 'orderId', 'message', 'localMessage', 'payUrl', 'errorCode', 'requestType',
+            'requestId', 'orderId', 'message', 'payUrl', 'amount',
         ];
     }
 }

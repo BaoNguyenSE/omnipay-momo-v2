@@ -46,7 +46,7 @@ class PurchaseRequest extends AbstractSignatureRequest
     /**
      * Thiết lập dữ liệu kèm theo đơn hàng.
      *
-     * @param  null|string  $data
+     * @param null|string $data
      * @return $this
      */
     public function setExtraData(?string $data)
@@ -67,7 +67,7 @@ class PurchaseRequest extends AbstractSignatureRequest
     /**
      * Thiết lập thông tin đơn hàng.
      *
-     * @param  null|string  $info
+     * @param null|string $info
      * @return $this
      */
     public function setOrderInfo(?string $info)
@@ -81,8 +81,23 @@ class PurchaseRequest extends AbstractSignatureRequest
     protected function getSignatureParameters(): array
     {
         return [
-            'partnerCode', 'accessKey', 'requestId', 'amount', 'orderId', 'orderInfo', 'returnUrl', 'notifyUrl',
-            'extraData',
+            'partnerCode', 'accessKey', 'requestId', 'amount', 'orderId', 'orderInfo', 'notifyUrl',
+            'extraData', 'requestType', 'redirectUrl', 'ipnUrl',
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     * @throws \Omnipay\Common\Exception\InvalidResponseException
+     */
+    public function sendData($data)
+    {
+        $response = $this->httpClient->request('POST', $this->getEndpoint() . '/v2/gateway/api/create', [
+            'Content-Type' => 'application/json; charset=UTF-8',
+        ], json_encode($data));
+        $responseClass = $this->responseClass;
+        $responseData = $response->getBody()->getContents();
+
+        return $this->response = new $responseClass($this, json_decode($responseData, true) ?? []);
     }
 }
